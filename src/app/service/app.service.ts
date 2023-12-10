@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AppService {
-    apikey = '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';
     constructor(private http: HttpClient) {
 
     }
