@@ -1,0 +1,56 @@
+<div class="container column-align">
+	<div class="topnav mat-elevation-z6 row-align">
+		OCR Demo
+	</div>
+	<div class="content">
+		<div *ngIf="!uploaded && !loading" class="upload-container column-align center">
+			<div class="upload-card mat-elevation-z6 column-align">
+				<h2>Upload a file</h2>
+				<div *ngIf="file" class="filename-container column-align">
+					<div class="row-align" style="width: 100%">
+						<img *ngIf="previewUrl" [src]="previewUrl" alt="Uploaded Image" style="height: 300px; align-self: center"
+							clsas="mat-elevation-z6" />
+						<div class="column-align center" style="flex: 1;">
+							{{file.name}}
+							<div class="row-align" style="column-gap: 5px; align-self: center; padding-top: 15px;">
+								<button mat-raised-button color="primary" (click)="upload()">Upload</button>
+								<button mat-stroked-button color="primary" (click)="cancel()">Cancel</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div *ngIf="!file" class="dndarea column-align center">
+					<!-- <div class="column-align center">
+						<img src="/assets/698977.png" alt="" width="100">
+						<h3>Drop your image here</h3>
+					</div>
+					<div style="padding: 10px 0;">-------------------- or --------------------</div> -->
+					<div>
+						<input #fileInput hidden="true" type="file" onclick="this.value=null"
+							(change)="inputChange($event)" accept=".png" />
+						<button mat-raised-button color="primary" (click)="fileInput.click()">Browse File</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="spinner-container column-align center" *ngIf="!uploaded && loading">
+			<mat-spinner></mat-spinner>
+		</div>
+		<div *ngIf="uploaded" class="ocr-container row-align">
+			<div class="image-container center column-align">
+				<img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image" style="height: 100%"
+					clsas="mat-elevation-z6" />
+			</div>
+			<div style="flex: 1; padding: 15px;">
+				<h3>Boundary Box Confidence Score: {{score * 100 | number: '1.0-2'}}%</h3>
+				<div>
+					<!-- <div *ngFor="let t of text | keyvalue"> -->
+						<div> Full name: {{text.info.full_name}}</div>
+						<div>Address: {{text.info.address}}</div>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
